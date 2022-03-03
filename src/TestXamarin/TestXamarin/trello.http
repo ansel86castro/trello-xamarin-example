@@ -1,0 +1,1 @@
+GET https: //api.trello.com/1/members/me/boards?fields=name,url&key={apiKey}&token={apiToken}

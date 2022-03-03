@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:TestXamarin.ViewModels" xmlns:models1="clr-namespace:TestXamarin.Models"
+             x:Class="TestXamarin.MainPage"
+             x:DataType="models:MainPageViewModel" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Invite Member" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView ItemsSource="{Binding Items}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models1:ListModel">
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding CardsCount}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+    </StackLayout>
+
+</ContentPage>

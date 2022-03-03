@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TestXamarin.Behaviors"
+             x:Class="TestXamarin.Views.InviteMemberPage">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ContentView IsVisible="{Binding IsLoaded, Mode=OneWay}" HorizontalOptions="Fill" >
+                <StackLayout Padding="16">
+                    <Entry                    
+                        Placeholder="Email"
+                        local:EmailValidatorBehavior.AttachBehavior="True"
+                        Text="{Binding Email}"                    
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="Fill" />
+                    <Button Text="Invite" Command="{Binding Invite}" />
+                </StackLayout>
+            </ContentView>
+            <ContentView IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

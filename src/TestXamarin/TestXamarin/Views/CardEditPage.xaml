@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TestXamarin.ViewModels" xmlns:models="clr-namespace:TestXamarin.Models"
+             x:Class="TestXamarin.Views.CardEditPage"
+             x:DataType="viewmodels:CardEditViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <ContentView IsVisible="{Binding IsLoaded, Mode=OneWay}" HorizontalOptions="Fill" >
+                <StackLayout Padding="16">
+                <Entry  
+                    
+                    Placeholder="Name"
+                    Text="{Binding Name}"                    
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="Fill" />
+
+                    <StackLayout>
+                        <Label Text="Attachements"/>
+                        <CollectionView ItemsSource="{Binding Attachements}" SelectionMode="None" >
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ListItemAttachementModel">
+                                    <Frame BorderColor="Gray" Padding="10" Margin="5">
+                                        <StackLayout>
+                                            <Label Text="{Binding Name}"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <Picker Title="List" ItemsSource="{Binding Lists, Mode=OneWay}" SelectedItem="{Binding List, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}" />
+
+                    <StackLayout>
+                        <Label Text="New Attachement"/>
+                        <Label Text="{Binding Filename}" />
+                        <Button Text="Attach File" Clicked="Button_Attach_Clicked"/>
+                    </StackLayout>
+                    
+                    <Button Text="Add Card" Command="{Binding AddCard}" />
+                </StackLayout>
+            </ContentView>
+            <ContentView IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

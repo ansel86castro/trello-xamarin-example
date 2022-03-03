@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:TestXamarin.ViewModels" xmlns:models="clr-namespace:TestXamarin.Models"
+             x:Class="TestXamarin.Views.ListDetailsPage"
+             x:DataType="viewmodels:ListDetailsViewModel" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Card" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
+            <CollectionView ItemsSource="{Binding Items}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ListItemModel">
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding Name}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
